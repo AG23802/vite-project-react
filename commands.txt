@@ -1,0 +1,7 @@
+maven
+./mvnw spring-boot:run   
+./mvnw clean package
+
+docker
+docker build -t springboot-jwt-graphql-rest . 
+docker run -p 8080:8080 springboot-jwt-graphql-rest
