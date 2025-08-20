@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-const url = "http://localhost:8080/protected/raw-json";
+const url = "https://www.fruityvice.com//api/fruit/:nutrition?min=0&max=1000";
 const token =
   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0Nzk1MjU4MiwiZXhwIjoxNzQ4MDM4OTgyfQ.KN67bVZFwh7V9H0ARQmpyqyoda010doCx2ZGPFx491U";
 
 export default function Search({setFruitData}) {
-  const [query, setQuery] = useState("Rosaceae");
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const fetchFruits = async () => {
@@ -28,7 +28,7 @@ export default function Search({setFruitData}) {
     <div>
       <input
         type="text"
-        placeholder="Family"
+        placeholder="Search for fruits"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       ></input>

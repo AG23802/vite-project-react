@@ -6,12 +6,10 @@ export default function Login() {
   const [value, setValue] = useState('');
   const { dispatch } = useContext(UserContext);
 
-  //   const { user, setUser } = useContext(UserContext);
   const [user, setUser] = useLocalStorage('user', 'defaultUser');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setUser(value);
     dispatch({ type: 'login', payload: value });
     setUser(value);
   };
@@ -19,11 +17,13 @@ export default function Login() {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        placeholder="Username"
+        autoFocus
         value={value}
         type="text"
         onChange={(e) => setValue(e.target.value)}
       />
-      <button>Submit</button>
+      <button>Log In</button>
     </form>
   );
 }

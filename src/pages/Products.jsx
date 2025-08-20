@@ -1,11 +1,14 @@
-import { useParams } from "react-router-dom"
+import { useState } from "react";
+import Search from "../components/Search";
+import FruitList from "../components/FruitList";
 
 export default function Products() {
-    const { id } = useParams();
+    const [fruitData, setFruitData] = useState([]);
     return (
         <div>
             <h1>Products List</h1>
-            <p>Product ID: { id }</p>
+            <Search fruitData={fruitData} setFruitData={setFruitData} />
+            <FruitList fruitData={fruitData} />
         </div>
     )
 }

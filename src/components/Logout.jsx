@@ -9,7 +9,7 @@ export default function Logout() {
 
   return (
     <div>
-      <button onClick={(e) => dispatch({type: "logout", payload: "guest"})}>Log Out</button>
+      <button onClick={(e) => dispatch({type: "logout", payload: null})}>Log Out</button>
     </div>
   );
 }

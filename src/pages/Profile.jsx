@@ -1,12 +1,13 @@
-import { useLocation } from "react-router-dom";
+
+import { useState, useContext } from 'react';
+import { UserProvider, UserContext } from '../contexts/UserContext';
 
 export default function Profile() {
-  const location = useLocation();
-  const { username } = location.state;
+   const { user } = useContext(UserContext);
   return (
     <div>
       <h3>Profile</h3>
-      <span>{username}</span>
+      <span>{user}</span>
     </div>
   );
 }
