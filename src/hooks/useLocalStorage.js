@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function useLocalStorage(key, initialValue) {
   // Function to get from localStorage or use initialValue if not found
-  const getStoredValue = () => {
+  const getItem = () => {
     try {
       const item = localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
@@ -12,10 +12,10 @@ export default function useLocalStorage(key, initialValue) {
     }
   };
 
-  const [storedValue, setStoredValue] = useState(getStoredValue);
+  const [storedValue, setStoredValue] = useState(getItem);
 
   // Setter function to update state and localStorage
-  const setValue = (value) => {
+  const setItem = (value) => {
     try {
       // Allow value to be a function like useState setter
       const valueToStore =
@@ -27,5 +27,14 @@ export default function useLocalStorage(key, initialValue) {
     }
   };
 
-  return [storedValue, setValue];
+  const removeItem = () => {
+    try {
+      localStorage.removeItem(key);
+      setStoredValue(null);
+    } catch (error) {
+      console.warn('Error removing localStorage key:', key, error);
+    }
+  };
+
+  return [storedValue, setItem, removeItem];
 }

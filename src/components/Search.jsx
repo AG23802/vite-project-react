@@ -1,28 +1,6 @@
 import { useEffect, useState } from "react";
 
-const url = "https://www.fruityvice.com//api/fruit/:nutrition?min=0&max=1000";
-const token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0Nzk1MjU4MiwiZXhwIjoxNzQ4MDM4OTgyfQ.KN67bVZFwh7V9H0ARQmpyqyoda010doCx2ZGPFx491U";
-
-export default function Search({setFruitData}) {
-  const [query, setQuery] = useState("");
-
-  useEffect(() => {
-    const fetchFruits = async () => {
-      const res = await fetch(url, {
-        method: "GET", // or 'POST', 'PUT', etc.
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await res.json()
-      setFruitData(data)
-    };
-
-    fetchFruits();
-  }, [query]);
+export default function Search({ query, setQuery }) {
 
   return (
     <div>

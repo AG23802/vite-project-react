@@ -1,29 +1,90 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { UserContext } from '../contexts/UserContext';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 export default function Login() {
-  const [value, setValue] = useState('');
-  const { dispatch } = useContext(UserContext);
+  const [username, setUsername] = useState('admin');
+  const [password, setPassword] = useState('123456');
 
-  const [user, setUser] = useLocalStorage('user', 'defaultUser');
+  const { login, loading, error } = useContext(UserContext);
+
+  const usernameRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({ type: 'login', payload: value });
-    setUser(value);
+    // console.log(sum)
+    login(username, password);
   };
+
+  const numbers = [1, 2, 3, 4, 5];
+
+const sum = useMemo(() => {
+  // console.log("Calculating sum...");
+  return numbers.reduce((a, b) => a + b, 0);
+}, [numbers]); // only recalculates if numbers array changes
+
+  // useLayoutEffect(() => {
+  //   console.log('Layout Effect');
+  //   if (usernameRef.current) {
+  //     usernameRef.current.style.border = '2px solid red';
+  //   }
+  // }, []);
+
+  // Runs only once when the component mounts.
+  // Cleanup runs only on unmount.
+  // This is similar to Angular’s ngOnInit + ngOnDestroy.
+  // useEffect(() => {
+  //   console.log('Runs once on mount');
+  //   return () => console.log('Cleanup on unmount');
+  // }, []);
+
+  // Runs after every render.
+  // Cleanup runs before the next render.
+  // useEffect(() => {
+  //   console.log('Runs on every render');
+  // });
+
+  // Runs on mount and whenever dep1 or dep2 changes.
+  // Cleanup runs before the effect re-runs or on unmount.
+  // useEffect(() => {
+  //   console.log('Runs when dep1 or dep2 changes');
+  //   return () => console.log('Cleanup before next run or unmount');
+  // }, [username, password]);
+
+  // <input autoFocus />
+
+  useEffect(() => {
+    if (usernameRef.current) {
+      usernameRef.current.focus();
+    }
+  }, []);
 
   return (
     <form onSubmit={handleSubmit}>
       <input
+        ref={usernameRef}
         placeholder="Username"
-        autoFocus
-        value={value}
+        // autoFocus
+        value={username}
         type="text"
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => setUsername(e.target.value)}
       />
-      <button>Log In</button>
+
+      <input
+        placeholder="Password"
+        value={password}
+        type="password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      {loading ? <span>loading</span> : <button>Log In</button>}
+      {error && (
+        <div
+          className="border border-gray-500 rounded"
+          style={{ color: 'red' }}
+        >
+          {error}
+        </div>
+      )}
     </form>
   );
 }
