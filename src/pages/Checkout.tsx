@@ -1,7 +1,7 @@
 import { useContext } from "react"
-import { UserContext } from "../contexts/UserContext"
-import { CartContext } from "../contexts/CartContext"
-import FruitList from "../components/FruitList"
+import { UserContext } from "../contexts/UserContext.js"
+import { CartContext } from "../contexts/CartContext.js"
+import FruitList from "../components/FruitList.js"
 
 export default function Checkout() {
     const {user} = useContext(UserContext)

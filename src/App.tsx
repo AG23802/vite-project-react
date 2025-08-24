@@ -1,17 +1,17 @@
 import { useContext } from 'react';
 import './App.css';
-import Nav from './components/Nav/Nav';
+import Nav from './components/Nav/Nav.js';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
-import FruitDetails from './pages/FruitDetails';
-import { UserProvider, UserContext } from './contexts/UserContext';
-import Login from './components/Login';
-import Checkout from './pages/Checkout';
-import { CartProvider, CartContext } from './contexts/CartContext';
-import { fruits } from './data/fruits'; // Assuming fruits data is imported from a file
-import Fruits from './pages/Fruits';
-import ProtectedRoute from './components/ProtectedRoute';
+import Home from './pages/Home.js';
+import FruitDetails from './pages/FruitDetails.js';
+import { UserProvider, UserContext } from './contexts/UserContext.js';
+import Login from './components/Login.js';
+import Checkout from './pages/Checkout.js';
+import { CartProvider, CartContext } from './contexts/CartContext.js';
+import { fruits } from './data/fruits.js';
+import Fruits from './pages/Fruits.js';
+import ProtectedRoute from './components/ProtectedRoute.js';
 
 export default function App() {
   function MainApp() {

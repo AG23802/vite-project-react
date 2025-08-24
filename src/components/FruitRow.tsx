@@ -1,14 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../contexts/CartContext";
+import { CartContext } from "../contexts/CartContext.js";
 import { useContext } from "react";
+import type { Fruit } from "../types/Fruit.js";
+import type { CartContextType } from "../types/CartContextType.js";
 
-export default function FruitRow({ fruit }) {
-  let row;
-  const { cart, addToCart, removeFromCart } = useContext(CartContext);
+export default function FruitRow({ fruit } : { fruit: Fruit }) {
+  const { cart, addToCart, removeFromCart } : CartContextType = useContext(CartContext);
 
   const navigate = useNavigate();
 
-  const viewFruit = (id) => {
+  const viewFruit = (id: number) => {
     navigate(`/products/${id}`);  
   }
 

@@ -1,15 +1,45 @@
-import { createContext, useReducer } from 'react';
-import useLocalStorage from '../hooks/useLocalStorage';
+import { createContext, useReducer, type ReactNode } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage.js';
+import type { User } from '../types/User.js';
+import type { Action } from '../types/Action.js';
 
-const UserContext = createContext('null');
+interface UserProviderProps {
+  children: ReactNode;
+}
 
-function UserProvider({ children }) {
+interface State {
+  user: User;
+  loading: boolean;
+  error: string | null;
+}
+
+interface UserContextType {
+  user: User;
+  loading: boolean;
+  error: string | null;
+  dispatch: React.Dispatch<any>;
+  login: (username: string, password: string) => Promise<void>;
+  logout: () => void;
+}
+
+const defaultCartContext: UserContextType = {
+  user: null,
+  loading: false,
+  error: null,
+  dispatch: () => {},
+  login: async () => {},
+  logout: () => {},
+};
+
+const UserContext = createContext(defaultCartContext);
+
+function UserProvider({ children }: UserProviderProps) {
   const [storedUser, setStoredUser, removeStoredUser] = useLocalStorage(
     'user',
     null
   );
 
-  const userReducer = (state, action) => {
+  const userReducer = (state: State, action: Action) => {
     switch (action.type) {
       case "loginStart":
         return { ...state, loading: true, error: null };
@@ -19,12 +49,14 @@ function UserProvider({ children }) {
         return { ...state, loading: false, error: action.payload };
       case 'logout':
         return { user: null, loading: false, error: null };
+      default:
+        return state;
     }
   };
 
   const [state, dispatch] = useReducer(userReducer, { user: storedUser });
 
-  const login = async (username, password) => {
+  const login = async (username: string, password: string) => {
     dispatch({ type: "loginStart" });
     try {
       const res = await fetch('http://localhost:8080/api/v1/auth/login', {
@@ -43,7 +75,7 @@ function UserProvider({ children }) {
       } else {
         dispatch({ type: 'loginError', payload: data.error });
       }
-    } catch (error) {
+    } catch (error: any) {
       dispatch({ type: 'loginError', payload: error.message });
     }
   };

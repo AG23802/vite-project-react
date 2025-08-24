@@ -1,5 +1,5 @@
-import { useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { UserContext } from '../contexts/UserContext';
+import { useContext, useEffect, useLayoutEffect, useMemo, useRef, useState, type FormEvent } from 'react';
+import { UserContext } from '../contexts/UserContext.js';
 
 export default function Login() {
   const [username, setUsername] = useState('admin');
@@ -7,9 +7,9 @@ export default function Login() {
 
   const { login, loading, error } = useContext(UserContext);
 
-  const usernameRef = useRef(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // console.log(sum)
     login(username, password);

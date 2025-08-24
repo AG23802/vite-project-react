@@ -1,4 +1,6 @@
-export const fruits = [
+import type { Fruit } from "../types/Fruit.js";
+
+export const fruits: Fruit[] = [
   {
     id: 1,
     name: 'Apple',

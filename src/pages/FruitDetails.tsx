@@ -1,10 +1,12 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { CartContext } from '../contexts/CartContext';
+import { CartContext } from '../contexts/CartContext.js';
 
 export default function FruitDetails() {
   const { id } = useParams();
   const { cart, addToCart, removeFromCart, fruits } = useContext(CartContext);
+
+  if (!id) return <div>No fruit ID provided</div>;
 
   let fruit = fruits.find((fruit) => fruit.id === parseInt(id));
 

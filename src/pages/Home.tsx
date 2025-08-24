@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { CartContext } from '../contexts/CartContext';
+import { CartContext } from '../contexts/CartContext.js';
 
 export default function Home() {
   let { fruits } = useContext(CartContext);

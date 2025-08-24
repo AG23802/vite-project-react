@@ -1,8 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../contexts/UserContext";
+import { UserContext } from "../contexts/UserContext.js";
 
-export default function ProtectedRoute({ children }) {
+interface ProtectedRouteProps {
+  children?: React.ReactNode;
+}
+
+export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user } = useContext(UserContext);
 
   if (!user) {

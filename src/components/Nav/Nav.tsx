@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import styles from './Nav.module.css';
 import { useContext } from 'react';
-import { CartContext } from '../../contexts/CartContext';
-import Logout from '../Logout';
-import { UserContext } from '../../contexts/UserContext';
+import { CartContext } from '../../contexts/CartContext.js';
+import Logout from '../Logout.js';
+import { UserContext } from '../../contexts/UserContext.js';
 
 export default function Nav() {
   const { total } = useContext(CartContext);

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import Search from "../components/Search";
-import FruitList from "../components/FruitList";
-import { CartContext } from "../contexts/CartContext";
+import Search from "../components/Search.js";
+import FruitList from "../components/FruitList.js";
+import { CartContext } from "../contexts/CartContext.js";
 
 export default function Fruits() {
     const {fruits} = useContext(CartContext)

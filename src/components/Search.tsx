@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+export interface SearchProps {
+  query: string;
+  setQuery: (query: string) => void;
+}
 
-export default function Search({ query, setQuery }) {
+export default function Search({ query, setQuery }: SearchProps) {
 
   return (
     <div>
